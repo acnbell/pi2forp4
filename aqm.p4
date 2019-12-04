@@ -159,7 +159,7 @@ control MyEgress(inout headers hdr,
     // alpha = 0,3125 => 1342 and beta = 3,125 => 13422
     // delay target is in us = 20000 => 20 msec
     // PI update interval is 2^x us, x = 15 => 32768 us ~= 33 msec
-    action update_pi2(alpha_t alpha, beta_t beta, delay_t target, interval_t interval){
+    action pi2(alpha_t alpha, beta_t beta, delay_t target, interval_t interval){
         bit<48> last_update_time = 0;
         int<32> last_queue_delay;
         bit<32> last_probability;
@@ -211,17 +211,15 @@ control MyEgress(inout headers hdr,
         }
     }
     
-    table pi2_exact{
+    table aqm{
         key = {
             standard_metadata.egress_port: exact;
         }    
         actions = {
-            update_pi2();
+            pi2();
             NoAction;
-            drop;
         }
-        size = 256;
-            default_action = NoAction; 
+        default_action = NoAction; 
     }
 
 

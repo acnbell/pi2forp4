@@ -32,11 +32,11 @@
       }
     },
     {
-      "table": "MyEgress.pi2_exact",
+      "table": "MyEgress.aqm",
       "match": {
         "standard_metadata.egress_port": [2]
       },
-        "action_name": "MyEgress.update_pi2",
+        "action_name": "MyEgress.pi2",
         "action_params": {
          "alpha": 1342,
          "beta": 13421, 
