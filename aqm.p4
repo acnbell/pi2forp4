@@ -159,11 +159,7 @@ control MyEgress(inout headers hdr,
     // alpha = 0,3125 => 1342 and beta = 3,125 => 13422
     // delay target is in us = 20000 => 20 msec
     // PI update interval is 2^x us, x = 15 => 32768 us ~= 33 msec
-<<<<<<< HEAD
     action pi2(alpha_t alpha, beta_t beta, delay_t target, interval_t interval){
-=======
-    action update_pi2(alpha_t alpha, beta_t beta, delay_t target, interval_t interval){
->>>>>>> 7b410b0871fa76351b85c2459f81738617919f5d
         bit<48> last_update_time = 0;
         int<32> last_queue_delay;
         bit<32> last_probability;
@@ -215,28 +211,16 @@ control MyEgress(inout headers hdr,
         }
     }
     
-<<<<<<< HEAD
+
     table aqm{
-=======
-    table pi2_exact{
->>>>>>> 7b410b0871fa76351b85c2459f81738617919f5d
         key = {
             standard_metadata.egress_port: exact;
         }    
         actions = {
-<<<<<<< HEAD
             pi2();
             NoAction;
         }
         default_action = NoAction; 
-=======
-            update_pi2();
-            NoAction;
-            drop;
-        }
-        size = 256;
-            default_action = NoAction; 
->>>>>>> 7b410b0871fa76351b85c2459f81738617919f5d
     }
 
 
@@ -244,7 +228,7 @@ control MyEgress(inout headers hdr,
         // store queuing delay in ms (up to 2047ms)
         hdr.ipv4.qdelay_ms = (bit<11>)(standard_metadata.deq_timedelta >> 10);
 
-        pi2_exact.apply();    
+        aqm.apply();    
         if (meta.mark_drop == 1) {
             drop();
         } else {

@@ -32,24 +32,16 @@
       }
     },
     {
-<<<<<<< HEAD
       "table": "MyEgress.aqm",
       "match": {
         "standard_metadata.egress_port": [2]
       },
         "action_name": "MyEgress.pi2",
-=======
-      "table": "MyEgress.pi2_exact",
-      "match": {
-        "standard_metadata.egress_port": [2]
-      },
-        "action_name": "MyEgress.update_pi2",
->>>>>>> 7b410b0871fa76351b85c2459f81738617919f5d
         "action_params": {
          "alpha": 1342,
          "beta": 13421, 
-	 "target": 20000,
-	 "interval": 15
+	 	 "target": 20000,
+	     "interval": 15
       }
     }
   ]
